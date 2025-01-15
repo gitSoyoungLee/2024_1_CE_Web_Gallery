@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageView</title>
+    <style>
+        .text-box {
+            width: 22%;
+            border: 1px solid black;
+            padding: 5px;
+            margin-bottom: 15px;
+            background-color: white;
+            color: black;
+            font-size: 14px;
+        }
+        .button-container{
+            width: 22%
+        }
+    </style>
+    <script>
+        function UpdateRequest(id){
+            <!-- 수정 버튼을 눌렀을 경우 이동 -->
+            window.location.href = '/upload?id='+id;
+        }
+    </script>
+</head>
+<body>
+<div align="center" style="margin-top: 100px">
+    <div>
+        <img th:src="@{/{image}(image=${board.image})}" alt="Image" style="width: 22%; height: auto;">
+    </div>
+    <div>
+        <label for="title"></label>
+        <div class="text-box" style="height: 20px;" th:text="${board.title}" id="title"></div>
+    </div>
+    <div>
+        <label for="contents"></label>
+        <div class="text-box" style="height: 100px;" th:text="${board.contents}" id="contents"></div>
+    </div>
+    <div class="button-container">
+        <input type="button" id="update" value="수정" style="float:left" th:onclick="'UpdateRequest(' + ${board.id} + ')'">
+        <form action="/remove" method="post" enctype="multipart/form-data">
+            <input type="hidden" id="id" name="id" th:value="${board.id}">
+            <input type="submit" id="remove" value="삭제" style="float:right">
+        </form>
+    </div>
+</div>
+</body>
+</html>

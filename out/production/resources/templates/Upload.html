@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <style>
+        input[type="text"] {
+            /*텍스트 박스 너비 지정*/
+            width: 22%;
+            margin-bottom: 15px;
+        }
+        .button-container{
+            width: 22%;
+        }
+    </style>
+    <script>
+        function init() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if (id) {
+                document.getElementById('id').value = id;
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<!-- upload 또는 update -->
+<form action="/board" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="id" name="id" value="">
+    <div align="center" style="margin-top: 100px">
+        <div>
+            <label for="title" ></label>
+            <input type="text" style="height: 20px; font-family:Segoe UI;" placeholder="Input : Title(최대 20자)" id="title" name="title" maxlength="20" required>
+        </div>
+        <div>
+            <label for="contents" ></label>
+            <textarea  style="width: 22%; height: 200px; font-family:Segoe UI;" placeholder="Input : Comment(최대 100자)" id="contents" name="contents" maxlength="100" required></textarea>
+        </div>
+        <div class="button-container">
+            <label for="image" style="float:left">파일 선택:&nbsp</label>
+            <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" required style="float:left">
+            <input type="submit" value="전송" style="float:left" >
+        </div>
+    </div>
+</form>
+</body>
+</html>

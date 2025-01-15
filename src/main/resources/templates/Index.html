@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        .upload-button{
+            /* 우측 상단에 배치 */
+            position: absolute;
+            top: 10px;
+            right: 30px;
+        }
+        .gallery{
+            margin-top: 100px; /* 사진 올리기 버튼과 겹치지 않게 */
+            /*가로로 전시*/
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .gallery-each{
+            /*각 사진 사이 거리와 제목 정렬*/
+            margin:10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <div class="upload-button">
+        <!-- Upload로 이동 -->
+        <p onclick="location.href='/upload'">사진 올리기</p>
+    </div>
+    <div class="gallery">
+        <th:block th:each="board : ${boards}">
+            <div class="gallery-each">
+                <!-- 각 이미지 조회 -->
+                <a th:href="@{/board/{id}(id=${board.id})}">
+                <img th:src="@{{image}(image=${board.image})}" alt="Image" style="width: auto; height: 200px;">
+                </a>
+                <h5 th:onclick="'location.href=\'/board/' + ${board.id} + '\';'"  th:text="${board.title}"></h5>
+            </div>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>
